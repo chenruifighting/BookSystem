@@ -2,6 +2,8 @@ package com.service.impl;
 
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +26,11 @@ public class ReaderServiceImpl implements IReaderService{
 		return readerDao.returnReader(bookId);
 	}
 	@Override
-	public List<Reader> selectReaders(Integer page) {
-		// TODO Auto-generated method stub
-		return readerDao.selectReaders(page);
+	public PageInfo<Reader> selectReaders(Integer page) {
+		PageHelper.startPage(page,4);
+		List<Reader> list=readerDao.selectReaders();
+		PageInfo pageInfo=new PageInfo(list);
+		return pageInfo;
 	}
 	@Override
 	public Reader selectOne(Integer readerId) {
@@ -57,10 +61,5 @@ public class ReaderServiceImpl implements IReaderService{
 	public Reader readerInfo(Integer readerId) {
 		// TODO Auto-generated method stub
 		return readerDao.readerInfo(readerId);
-	}
-	@Override
-	public Integer pageCount() {
-		// TODO Auto-generated method stub
-		return readerDao.pageCount();
 	}
 }

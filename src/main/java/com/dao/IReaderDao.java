@@ -29,20 +29,13 @@ public interface IReaderDao {
 	 * 查询所有读者
 	 * @return
 	 */
-	@Select("select * from reader limit ${(page-1)*5},5")
-	List<Reader> selectReaders(Integer page);
-	/**
-	 * 查询读者总数量
-	 * @return
-	 */
-	@Select("select count(*) from reader")
-	Integer pageCount();
+	@Select("select * from reader")
+	List<Reader> selectReaders();
 	/**
 	 * 根据bookId，readerId查询读者信息
 	 * @param readerId
 	 * @return
 	 */
-
 	@Select("select * from reader where readerId=#{readerId}")
 	Reader selectOne(@Param("readerId")Integer readerId);
 	/**

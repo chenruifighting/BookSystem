@@ -2,17 +2,16 @@ package com.controller;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.pojo.Books;
 import com.pojo.DateRecord;
 import com.service.IBookService;
 import com.service.IDateRecordService;
-@SessionAttributes({"page","pageNum"})
 @Controller
 @RequestMapping("/date")
 public class DateRecordController {
@@ -50,11 +49,8 @@ public class DateRecordController {
 
 	@RequestMapping("/borrowReturn")
 	public String borrowReturn(Model model,Integer page) {
-		List<Books> books=bookService.selectBooks(page);
-		Integer pageNum=(int) Math.ceil(bookService.pageCount()/5.0);
-		model.addAttribute("books",books);
-		model.addAttribute("page",page);
-		model.addAttribute("pageNum",pageNum);
+		PageInfo<Books> pageInfo=bookService.selectBooks(page);
+		model.addAttribute("pageInfo",pageInfo);
 		return "borrowReturn";
 	}
 }

@@ -2,6 +2,7 @@ package com.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import com.pojo.Books;
 import com.pojo.Reader;
 
@@ -10,12 +11,7 @@ public interface IBookService {
 	 * 查询所有图书
 	 * @return
 	 */
-	List<Books> selectBooks(Integer page);
-	/**
-	 * 查询图书数量
-	 * @return
-	 */
-	Integer pageCount();
+	PageInfo<Books> selectBooks(Integer page);
 	/**
 	 * 添加图书
 	 * @param books

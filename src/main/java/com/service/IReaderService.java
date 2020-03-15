@@ -2,6 +2,7 @@ package com.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import com.pojo.Books;
 import com.pojo.Reader;
 
@@ -21,12 +22,7 @@ public interface IReaderService {
 	 * 查询所有读者
 	 * @return
 	 */
-	List<Reader> selectReaders(Integer page);
-	/**
-	 * 查询读者总数量
-	 * @return
-	 */
-	Integer pageCount();
+	PageInfo<Reader> selectReaders(Integer page);
 	/**
 	 * 根据readerId查询读者信息
 	 * @param readerId

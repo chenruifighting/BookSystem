@@ -2,6 +2,8 @@ package com.service.impl;
 
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,14 +11,17 @@ import com.dao.IBookDao;
 import com.pojo.Books;
 import com.pojo.Reader;
 import com.service.IBookService;
+
 @Service("bookService")
 public class BookServiceImpl implements IBookService{
 	@Autowired
 	private IBookDao bookDao;
 	@Override
-	public List<Books> selectBooks(Integer page) {
-		// TODO Auto-generated method stub
-		return bookDao.selectBooks(page);
+	public PageInfo<Books> selectBooks(Integer page) {
+		PageHelper.startPage(page,4);
+		List<Books> list=bookDao.selectBooks();
+		PageInfo pageInfo=new PageInfo(list);
+		return pageInfo;
 	}
 	@Override
 	public void insert(Books books) {
@@ -57,10 +62,5 @@ public class BookServiceImpl implements IBookService{
 	public void returnBook(Integer bookId) {
 		// TODO Auto-generated method stub
 		bookDao.returnBook(bookId);
-	}
-	@Override
-	public Integer pageCount() {
-		// TODO Auto-generated method stub
-		return bookDao.pageCount();
 	}
 }

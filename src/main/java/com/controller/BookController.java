@@ -2,16 +2,15 @@ package com.controller;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.pojo.Books;
 import com.service.IBookService;
 import com.service.IDateRecordService;
-@SessionAttributes({"page","pageNum"})
 @Controller
 @RequestMapping("/book")
 public class BookController {
@@ -26,20 +25,14 @@ public class BookController {
 	 */
 	@RequestMapping("/allBooks")
 	public String allBooks(Model model,Integer page) {
-		List<Books> books=bookService.selectBooks(page);
-		Integer pageNum=(int) Math.ceil(bookService.pageCount()/5.0);
-		model.addAttribute("books",books);
-		model.addAttribute("page",page);
-		model.addAttribute("pageNum",pageNum);
+		PageInfo<Books> pageInfo=bookService.selectBooks(page);
+		model.addAttribute("pageInfo",pageInfo);
 		return "allBooks";
 	}
 	@RequestMapping("/reader_allBooks")
 	public String reader_queryBook(Model model,Integer page) {
-		List<Books> books=bookService.selectBooks(page);
-		Integer pageNum=(int) Math.ceil(bookService.pageCount()/5.0);
-		model.addAttribute("books",books);
-		model.addAttribute("page",page);
-		model.addAttribute("pageNum",pageNum);
+		PageInfo<Books> pageInfo=bookService.selectBooks(page);
+		model.addAttribute("pageInfo",pageInfo);
 		return "reader_allBooks";
 	}
 	/**

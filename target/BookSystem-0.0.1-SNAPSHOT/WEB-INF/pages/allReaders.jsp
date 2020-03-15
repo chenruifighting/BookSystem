@@ -30,7 +30,7 @@
 	            </tr>
             </thead>
             <tbody>
-	            <c:forEach items="${readers}" var="reader">
+	            <c:forEach items="${pageInfo.list}" var="reader">
 	                <tr>
 	                    <td><c:out value="${reader.readerId}"></c:out></td>
 	                    <td><c:out value="${reader.name}"></c:out></td>
@@ -47,11 +47,11 @@
         <form action="${pageContext.request.contextPath}/reader/allReaders" method="post" id="choicePage">
             <table border="1" align="right" >
                 <tr>
-                    <td>第${page}页 共${pageNum}页 <a href="${pageContext.request.contextPath}/reader/allReaders?page=1">首页</a></td>  
-                    <td><a href="${pageContext.request.contextPath}/reader/allReaders?page=${page>1?page-1:page}">上一页</a></td>                                                                                                                                                                                                         
-                    <td><a href="${pageContext.request.contextPath}/reader/allReaders?page=${page<pageNum?page+1:page}">下一页</a></td>
-                    <td><a href="${pageContext.request.contextPath}/reader/allReaders?page=${pageNum}">最后一页</a></td>
-                    <td>转到第:<input type="text" name="page" id="page" size="1">页<input type="submit" value="GO"></td>
+					<td>第${pageInfo.pageNum}页 共${pageInfo.pages}页 <a href="${pageContext.request.contextPath}/reader/allReaders?page=${pageInfo.navigateFirstPage}">首页</a></td>
+					<td><a href="${pageContext.request.contextPath}/reader/allReaders?page=${pageInfo.prePage>0?pageInfo.prePage:pageInfo.navigateFirstPage}">上一页</a></td>
+					<td><a href="${pageContext.request.contextPath}/reader/allReaders?page=${pageInfo.nextPage>0?pageInfo.nextPage:pageInfo.navigateLastPage}">下一页</a></td>
+					<td><a href="${pageContext.request.contextPath}/reader/allReaders?page=${pageInfo.navigateLastPage}">最后一页</a></td>
+					<td>转到第:<input type="text" name="page" id="page" size="1">页<input type="submit" value="GO"></td>
                 </tr>
             </table>
             <script>

@@ -21,7 +21,7 @@
             return flag;
         }
         $("#queryBook").submit(function () {
-            var val=$("#book").val();
+            const val = $("#book").val();
             if(val==''){
                 alert("请输入图书名");
                 return mySubmit(false);
@@ -48,7 +48,7 @@
 	            </tr>
             </thead>
             <tbody>
-	            <c:forEach items="${books}" var="book">
+	            <c:forEach items="${pageInfo.list}" var="book">
 		            <tr>
 		            	<td><c:out value="${book.id}"></c:out></td>
 		                <td><c:out value="${book.name}"></c:out></td>
@@ -68,10 +68,10 @@
         <form action="${pageContext.request.contextPath}/date/borrowReturn" method="post" id="choicePage">
             <table border="1" align="right" >
                 <tr>
-                    <td>第${page}页 共${pageNum}页 <a href="${pageContext.request.contextPath}/date/borrowReturn?page=1">首页</a></td>  
-                    <td><a href="${pageContext.request.contextPath}/date/borrowReturn?page=${page>1?page-1:page}">上一页</a></td>                                                                                                                                                                                                         
-                    <td><a href="${pageContext.request.contextPath}/date/borrowReturn?page=${page<pageNum?page+1:page}">下一页</a></td>
-                    <td><a href="${pageContext.request.contextPath}/date/borrowReturn?page=${pageNum}">最后一页</a></td>
+                    <td>第${pageInfo.pageNum}页 共${pageInfo.pages}页 <a href="${pageContext.request.contextPath}/date/borrowReturn?page=${pageInfo.navigateFirstPage}">首页</a></td>
+                    <td><a href="${pageContext.request.contextPath}/date/borrowReturn?page=${pageInfo.prePage>0?pageInfo.prePage:pageInfo.navigateFirstPage}">上一页</a></td>
+                    <td><a href="${pageContext.request.contextPath}/date/borrowReturn?page=${pageInfo.nextPage>0?pageInfo.nextPage:pageInfo.navigateLastPage}">下一页</a></td>
+                    <td><a href="${pageContext.request.contextPath}/date/borrowReturn?page=${pageInfo.navigateLastPage}">最后一页</a></td>
                     <td>转到第:<input type="text" name="page" id="page" size="1">页<input type="submit" value="GO"></td>
                 </tr>
             </table>

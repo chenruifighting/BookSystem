@@ -17,14 +17,8 @@ public interface IBookDao {
 	 * 按分页查询所有图书
 	 * @return
 	 */
-	@Select("select * from books limit ${(page-1)*5},5")
-	List<Books> selectBooks(Integer page);
-	/**
-	 * 查询图书总页数
-	 * @return
-	 */
-	@Select("select count(*) from books")
-	Integer pageCount();
+	@Select("select * from books")
+	List<Books> selectBooks();
 	/**
 	 * 添加图书，并设置state状态为1，表示在馆
 	 * @param books
