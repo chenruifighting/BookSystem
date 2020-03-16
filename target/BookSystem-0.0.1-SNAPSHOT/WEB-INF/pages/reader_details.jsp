@@ -14,7 +14,7 @@
             <h3 class="panel-title">《 ${details.name}》</h3>
         </div>
         <div class="panel-body">
-        <form action="${pageContext.request.contextPath}/book/reader_allBooks?page=${page}" method="post">
+        <form action="${pageContext.request.contextPath}/book/reader_allBooks?page=${pageInfo.pageNum}" method="post">
             <table class="table table-hover">
                 <tr>
                     <th width="15%">书名</th>

@@ -6,11 +6,15 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pojo.Books;
 import com.service.IBookService;
 import com.service.IDateRecordService;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+@SessionAttributes("pageInfo")
 @Controller
 @RequestMapping("/book")
 public class BookController {
@@ -49,9 +53,10 @@ public class BookController {
 	 * @return
 	 */
 	@RequestMapping("/insert")
-	public String insert(Books books) {
+	public String insert(Books books,ModelMap modelMap) {
 		bookService.insert(books);
-		return "redirect:/book/allBooks";
+		PageInfo<Books> pageInfo=bookService.selectBooks(1);
+		return "redirect:/book/allBooks?page="+pageInfo.getNavigateLastPage();
 	}
 	/**
 	 * 根据id查询图书详情
@@ -107,9 +112,10 @@ public class BookController {
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public String update(Books books) {
+	public String update(Books books, ModelMap modelMap) {
 		bookService.update(books);
-		return "redirect:/book/allBooks";
+		PageInfo<Books> pageInfo= (PageInfo<Books>) modelMap.get("pageInfo");
+		return "redirect:/book/allBooks?page="+pageInfo.getPageNum();
 	}
 	@RequestMapping("/doUpdateQuery")
 	public String doUpdateQuery(Books book,Model model) {
@@ -124,9 +130,10 @@ public class BookController {
 	 * @return
 	 */
 	@RequestMapping("/delete")
-	public String delete(Integer id) {
+	public String delete(Integer id, ModelMap modelMap) {
 		bookService.delete(id);
-		return "redirect:/book/allBooks";
+		PageInfo<Books> pageInfo= (PageInfo<Books>) modelMap.get("pageInfo");
+		return "redirect:/book/allBooks?page="+pageInfo.getPageNum();
 	}
 	/**
 	 * 根据图书名查询图书信息

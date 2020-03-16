@@ -18,9 +18,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pojo.User;
 import com.service.IUserService;
 import com.util.Md5Class;
+
+@SessionAttributes("user")
 @Controller
 @RequestMapping("/user")
-@SessionAttributes({"id","name","role"})
 public class UserController {
 	@Autowired
 	private IUserService userService;
@@ -35,14 +36,10 @@ public class UserController {
 		List<User> users=userService.selectUser();
 		for (User u : users) {
 			if(user.getId().equals(u.getId())&& Md5Class.stringToMd5(user.getPassword()).equals(u.getPassword())&&user.getRole()==1&&u.getRole()==1){
-				model.addAttribute("name",u.getName());
-				model.addAttribute("id",u.getId());
-				model.addAttribute("role",u.getRole());
+				model.addAttribute("user",u);
 				return "show";
 			}else if(user.getId().equals(u.getId())&& Md5Class.stringToMd5(user.getPassword()).equals(u.getPassword())&&user.getRole()==0&&u.getRole()==0){
-				model.addAttribute("name",u.getName());
-				model.addAttribute("id",u.getId());
-				model.addAttribute("role",u.getRole());
+				model.addAttribute("user",u);
 				return "reader_show";
 			}
 		}
@@ -56,7 +53,7 @@ public class UserController {
 	 */
 	@RequestMapping("/roleReg")
 	public void register(User user,Model model) {
-		model.addAttribute("role",user.getRole());
+		model.addAttribute("user",user);
 	}
 	/**
 	 * 跳转到注册页面
@@ -120,14 +117,13 @@ public class UserController {
 	 */
 	@RequestMapping("/doRepassword")
 	public String doRepassword(String oldPwd,String password,ModelMap modelMap) {
-		Integer id=(Integer)modelMap.get("id");
-		Integer role=(Integer)modelMap.get("role");
-		String dbPwd=userService.selectOne(id);
-		if(Md5Class.stringToMd5(oldPwd).equals(dbPwd)&&role==1) {
-			userService.update(id,Md5Class.stringToMd5(password));
+		User user= (User) modelMap.get("user");
+		String dbPwd=userService.selectOne(user.getId());
+		if(Md5Class.stringToMd5(oldPwd).equals(dbPwd)&&user.getRole()==1) {
+			userService.update(user.getId(),Md5Class.stringToMd5(password));
 			return "show";
-		}else if(Md5Class.stringToMd5(oldPwd).equals(dbPwd)&&role==0){
-			userService.update(id,Md5Class.stringToMd5(password));
+		}else if(Md5Class.stringToMd5(oldPwd).equals(dbPwd)&&user.getRole()==0){
+			userService.update(user.getId(),Md5Class.stringToMd5(password));
 			return "reader_show";
 		}else {
 			modelMap.addAttribute("msg","旧密码输入错误");

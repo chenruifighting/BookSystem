@@ -16,10 +16,10 @@
     <script type="text/javascript">
     	$(function(){
     		$("#id").blur(function(){
-    			var id=$(this).val();
-    			$.get("checkUser",{id:id},function(data){
-    				var span=$("#userId");
-    				if(data.userExsit){
+				const id = $(this).val();
+				$.get("checkUser",{id:id},function(data){
+					const span = $("#userId");
+					if(data.userExsit){
     					span.css("color","red");
     					span.html(data.msg);
     				}else{
@@ -37,14 +37,14 @@
 		<div class="panel-body">
 			<div class="panel panel-default" id="register">
 			    <div class="panel-heading" style="background-color: #fff">
-			    	<c:if test="${role==1}">
+			    	<c:if test="${user.role==1}">
 	                	 <h3 class="panel-title">管理员注册</h3>     
 	                </c:if>
-	                <c:if test="${role==0}">
+	                <c:if test="${user.role==0}">
 	                	 <h3 class="panel-title">借阅者注册</h3>     
 	                </c:if>
 			    </div>
-			    <form action="${pageContext.request.contextPath}/user/doReg?role=${role}" method="post" onSubmit="return show(this)">
+			    <form action="${pageContext.request.contextPath}/user/doReg?role=${user.role}" method="post" onSubmit="return show(this)">
 				    <div class="panel-body">
 				        <div class="form-group">
 				            <label for="id">用户ID</label>

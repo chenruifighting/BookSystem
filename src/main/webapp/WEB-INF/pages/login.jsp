@@ -67,10 +67,10 @@
 	        </div>
 			<div class="radio text-left">
 	            <label>
-					<input type="radio" id="role" name="role" value="0" checked>借阅者 	
+					<input type="radio" id="role" name="role" value="0" checked>借阅者
 	            </label>
 	            <label>
-					<input type="radio" id="role" name="role" value="1">管理员	
+					<input type="radio" id="role" name="role" value="1">管理员
 	            </label>
 	           	<label>
 	           		<a style="text-align: right;color: red;position: absolute" id="info">${msg}</a>

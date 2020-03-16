@@ -32,13 +32,13 @@
 	                        <b class="caret"></b>
 	                    </a>
 	                    <ul class="dropdown-menu">
-	                        <li><a href="${pageContext.request.contextPath}/reader/readerInfo?readerId=${id}">查看信息</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/reader/readerInfo?readerId=${user.id}">查看信息</a></li>
 	                        <li class="divider"></li>
-	                        <li><a href="${pageContext.request.contextPath}/reader/reader_updateInfo?readerId=${id}">修改信息</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/reader/reader_updateInfo?readerId=${user.id}">修改信息</a></li>
 	                    </ul>
                 	</li>
 	                <li>
-	                    <a href="${pageContext.request.contextPath}/date/reader_dateRecord?readerId=${id}" >
+	                    <a href="${pageContext.request.contextPath}/date/reader_dateRecord?readerId=${user.id}" >
 	                        	我的借还
 	                    </a>
 	                </li>
@@ -49,7 +49,7 @@
 	                </li>
 	            </ul>
 	            <ul class="nav navbar-nav navbar-right">
-	                <li><a><span class="glyphicon glyphicon-user"></span>&nbsp;借阅者：${name}，已登录</a></li>
+	                <li><a><span class="glyphicon glyphicon-user"></span>&nbsp;借阅者：${user.name}，已登录</a></li>
 	                <li><a href="${pageContext.request.contextPath}/user/login"><span class="glyphicon glyphicon-log-in"></span>&nbsp;退出</a></li>
 	            </ul>
 	        </div>

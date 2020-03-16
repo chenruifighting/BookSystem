@@ -61,7 +61,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a><span class="glyphicon glyphicon-user"></span>&nbsp;管理员：${name}，已登录</a></li>
+                <li><a><span class="glyphicon glyphicon-user"></span>&nbsp;管理员：${user.name}，已登录</a></li>
                 <li><a href="${pageContext.request.contextPath}/user/login"><span class="glyphicon glyphicon-log-in"></span>&nbsp;退出</a></li>
             </ul>
         </div>

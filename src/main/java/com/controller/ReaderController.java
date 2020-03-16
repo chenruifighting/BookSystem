@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pojo.Books;
@@ -13,6 +14,9 @@ import com.pojo.Reader;
 import com.service.IBookService;
 import com.service.IDateRecordService;
 import com.service.IReaderService;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+@SessionAttributes("pageInfo")
 @Controller
 @RequestMapping("/reader")
 public class ReaderController {
@@ -77,9 +81,10 @@ public class ReaderController {
 	 * @return
 	 */
 	@RequestMapping("/doUpdateReader")
-	public String doUpdateReader(Reader reader) {
+	public String doUpdateReader(Reader reader, ModelMap modelMap) {
 		readerService.doUpdateReader(reader);
-		return "redirect:/reader/allReaders";
+		PageInfo<Reader> pageInfo= (PageInfo<Reader>) modelMap.get("pageInfo");
+		return "redirect:/reader/allReaders?page="+pageInfo.getPageNum();
 	}
 
 	@RequestMapping("/reader_doUpdateReader")
@@ -139,9 +144,10 @@ public class ReaderController {
 	 * @return
 	 */
 	@RequestMapping("/doAddReader")
-	public String doAddReader(Reader reader) {
+	public String doAddReader(Reader reader, ModelMap modelMap) {
 		readerService.addReader(reader);
-		return "redirect:/reader/allReaders";
+		PageInfo<Reader> pageInfo = readerService.selectReaders(1);
+		return "redirect:/reader/allReaders?page="+pageInfo.getNavigateLastPage();
 	}
 
 	/**
