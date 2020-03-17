@@ -72,8 +72,8 @@
 			<div class="radio text-left">
 				<a style="margin-left: 30px"><input type="radio" id="role" name="role" value="0" checked>借阅者</a>
 				<a style="margin-left: 40px"><input type="radio" id="role" name="role" value="1">管理员</a>
+                <a style="margin-left: 45px;color: red;position: absolute" id="info">${msg}</a>
 			</div>
-            <p style="margin-left: 10px;text-align: right;color: red;position: absolute" id="info">${msg}</p></br>
 			<input type="submit" style="margin-left: 3px" class="btn btn-primary  btn-block" value="登录">
 	    </div>
     </form>
