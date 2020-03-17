@@ -20,7 +20,7 @@ public interface IUserService {
 	 * @param id
 	 * @return
 	 */
-	String selectOne(Integer id);
+	User selectOne(Integer id);
 	/**
 	 * 根据姓名修改密码
 	 * @param id

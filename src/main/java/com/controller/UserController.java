@@ -118,11 +118,11 @@ public class UserController {
 	@RequestMapping("/doRepassword")
 	public String doRepassword(String oldPwd,String password,ModelMap modelMap) {
 		User user= (User) modelMap.get("user");
-		String dbPwd=userService.selectOne(user.getId());
-		if(Md5Class.stringToMd5(oldPwd).equals(dbPwd)&&user.getRole()==1) {
+		User u=userService.selectOne(user.getId());
+		if(Md5Class.stringToMd5(oldPwd).equals(u.getPassword())&&user.getRole()==1) {
 			userService.update(user.getId(),Md5Class.stringToMd5(password));
 			return "show";
-		}else if(Md5Class.stringToMd5(oldPwd).equals(dbPwd)&&user.getRole()==0){
+		}else if(Md5Class.stringToMd5(oldPwd).equals(u.getPassword())&&user.getRole()==0){
 			userService.update(user.getId(),Md5Class.stringToMd5(password));
 			return "reader_show";
 		}else {
@@ -138,5 +138,25 @@ public class UserController {
 	public String login(SessionStatus status) {
 		status.setComplete();
 		return "login";
+	}
+
+	/**
+	 * 跳转到忘记密码界面
+	 * @return
+	 */
+	@RequestMapping("/forgetPwd")
+	public String forgetPwd() {
+		return "forgetPwd";
+	}
+	@RequestMapping("/doForgetPwd")
+	public String doForgetPwd(User user,Model model) {
+		User u=userService.selectOne(user.getId());
+		if(user.getName().equals(u.getName())){
+			userService.update(user.getId(),Md5Class.stringToMd5(user.getPassword()));
+			return "login";
+		}else {
+			model.addAttribute("msg","用户ID或者姓名输入错误");
+			return "forgetPwd";
+		}
 	}
 }

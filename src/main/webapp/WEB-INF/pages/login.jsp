@@ -65,25 +65,16 @@
 	            <label for="password">密码</label>
 	            <input type="password" class="form-control" name="password" placeholder="请输入密码">
 	        </div>
-			<div class="radio text-left">
-	            <label>
-					<input type="radio" id="role" name="role" value="0" checked>借阅者
-	            </label>
-	            <label>
-					<input type="radio" id="role" name="role" value="1">管理员
-	            </label>
-	           	<label>
-	           		<a style="text-align: right;color: red;position: absolute" id="info">${msg}</a>
-	           	</label>
+			<div class="form-group text-left">
+				<a style="margin-left: 10px" href="${pageContext.request.contextPath}/user/reg">用户注册</a>
+				<a style="margin-left: 180px" href="${pageContext.request.contextPath}/user/forgetPwd">忘记密码?</a>
 			</div>
 			<div class="radio text-left">
-	            <label>
-	                <input type="submit" style="margin-left: 3px" class="btn btn-primary  btn-block" value="登录">	
-	            </label>
-	            <label>
-        			<a href="${pageContext.request.contextPath}/user/reg" style="margin-right: 5px" class="btn btn-primary  btn-block">注册</a> 
-        		</label>
-        	</div>
+				<a style="margin-left: 30px"><input type="radio" id="role" name="role" value="0" checked>借阅者</a>
+				<a style="margin-left: 40px"><input type="radio" id="role" name="role" value="1">管理员</a>
+			</div>
+            <p style="margin-left: 10px;text-align: right;color: red;position: absolute" id="info">${msg}</p></br>
+			<input type="submit" style="margin-left: 3px" class="btn btn-primary  btn-block" value="登录">
 	    </div>
     </form>
 </div>

@@ -23,7 +23,7 @@ public class UserServiceImpl implements IUserService{
 		return userdao.selectUser();
 	}
 	@Override
-	public String selectOne(Integer id) {
+	public User selectOne(Integer id) {
 		// TODO Auto-generated method stub
 		return userdao.selectOne(id);
 	}

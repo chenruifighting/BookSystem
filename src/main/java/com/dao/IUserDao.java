@@ -28,8 +28,8 @@ public interface IUserDao {
 	 * @param id
 	 * @return
 	 */
-	@Select("select password from user where id=#{id}")
-	String selectOne(Integer id);
+	@Select("select * from user where id=#{id}")
+	User selectOne(Integer id);
 	/**
 	 * 根据姓名修改密码
 	 * @param id
