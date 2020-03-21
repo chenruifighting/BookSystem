@@ -6,11 +6,20 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.aliyuncs.CommonRequest;
+import com.aliyuncs.CommonResponse;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.exceptions.ServerException;
+import com.aliyuncs.http.MethodType;
+import com.aliyuncs.profile.DefaultProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -19,7 +28,7 @@ import com.pojo.User;
 import com.service.IUserService;
 import com.util.Md5Class;
 
-@SessionAttributes("user")
+@SessionAttributes({"user","code"})
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -149,14 +158,47 @@ public class UserController {
 		return "forgetPwd";
 	}
 	@RequestMapping("/doForgetPwd")
-	public String doForgetPwd(User user,Model model) {
+	public String doForgetPwd(User user,String code, ModelMap modelMap) {
+		String c=modelMap.get("code").toString();
 		User u=userService.selectOne(user.getId());
-		if(user.getName().equals(u.getName())){
+		if(u!=null&&c.equals(code)){
 			userService.update(user.getId(),Md5Class.stringToMd5(user.getPassword()));
 			return "login";
-		}else {
-			model.addAttribute("msg","用户ID或者姓名输入错误");
+		}else if(u==null){
+			modelMap.addAttribute("msg","用户ID不存在");
 			return "forgetPwd";
+		}else {
+			modelMap.addAttribute("msg","验证码输入错误");
+			return "forgetPwd";
+		}
+	}
+	@RequestMapping("/code")
+	@ResponseBody
+	public void code(String telephone, Model model){
+		String code="";
+		for(int i = 1 ; i <= 6;i++){
+			code+=(int)Math.floor(Math.random()*10);
+		}
+		model.addAttribute("code",code);
+		DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4FmNSpNLY6gtmxBU2GpF", "2OYsoj8WTRqDOhM2wKpCrdENlpCiFE");
+		IAcsClient client = new DefaultAcsClient(profile);
+
+		CommonRequest request = new CommonRequest();
+		request.setMethod(MethodType.POST);
+		request.setDomain("dysmsapi.aliyuncs.com");
+		request.setVersion("2017-05-25");
+		request.setAction("SendSms");
+		request.putQueryParameter("RegionId","cn-hangzhou");
+		request.putQueryParameter("PhoneNumbers",telephone);
+		request.putQueryParameter("SignName","图书管理系统");
+		request.putQueryParameter("TemplateCode","SMS_186395978");
+		request.putQueryParameter("TemplateParam","{'code':"+code+"}");
+		try {
+			CommonResponse response = client.getCommonResponse(request);
+		} catch (ServerException e) {
+			e.printStackTrace();
+		} catch (ClientException e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -1,0 +1,22 @@
+@charset "UTF-8";
+#myCarousel{	
+    margin-left:2%;
+    width:60%;
+    height:70%;
+    float:left;
+    z-index:999;
+    display:inline;
+}
+#login{
+	float:left;
+  	height:50%;
+   	width:23%;
+    margin-left:6%;
+    margin-top:6%;
+    display:inline;
+    z-index:999;
+}
+*{
+    padding:0;
+    margin:0;
+}
