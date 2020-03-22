@@ -12,20 +12,9 @@
     <script src="${pageContext.request.contextPath}/js/js.cookie.js"></script>
     <script src="${pageContext.request.contextPath}/js/model.js"></script>
     <script src="${pageContext.request.contextPath}/js/login.js"></script>
-    <script type="text/javascript">
-	    $(function(){
-			$("#getRole").click(function(){
-				const role=$("#role:checked").val();
-		       	$.ajax({
-		        url:"user/roleReg",
-		        data:{"role":role},
-		      }); 
-		   });
-	   });
-	</script>
 </head>
 <body>
-<h2 style="text-align: center;font-family: 'Adobe 楷体 Std R';color: palevioletred">图书管理系统</h2>
+<h2 style="text-align: center;font-family: 'Adobe 楷体 Std R';color: palevioletred">图书馆</h2>
 <div style="float:right;" id="github_iframe"></div>
 <div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
@@ -66,14 +55,10 @@
 	            <input type="password" class="form-control" name="password" placeholder="请输入密码">
 	        </div>
 			<div class="form-group text-left">
-				<a style="margin-left: 10px" href="${pageContext.request.contextPath}/user/reg" id="getRole">用户注册</a>
+				<a style="margin-left: 10px" href="${pageContext.request.contextPath}/user/reg">用户注册</a>
 				<a style="margin-left: 180px" href="${pageContext.request.contextPath}/user/forgetPwd">忘记密码?</a>
 			</div>
-            <div class="radio text-left">
-                <a style="margin-left: 30px"><input type="radio" id="role" name="role" value="0" checked>借阅者</a>
-                <a style="margin-left: 40px"><input type="radio" id="role" name="role" value="1">管理员</a>
-                <a style="margin-left: 45px;color: red;position: absolute" id="info">${msg}</a>
-            </div>
+            <p style="text-align: right;color: red;position: absolute" id="info">${msg}</p><br>
 			<input type="submit" style="margin-left: 3px" class="btn btn-primary  btn-block" value="登录">
 	    </div>
     </form>

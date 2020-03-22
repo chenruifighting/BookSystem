@@ -32,6 +32,10 @@
                             <input type="text" class="form-control" name="id" placeholder="请输入用户ID">
                         </div>
                         <div class="form-group">
+                            <label for="name">用户名</label>
+                            <input type="text" class="form-control" name="name" placeholder="请输入用户名">
+                        </div>
+                        <div class="form-group">
                             <label for="telephone">手机号码</label>
                             <input type="text" class="form-control" id="telephone" name="telephone" placeholder="请输入手机号码">
                         </div>
@@ -47,7 +51,7 @@
                             <label for="confirmPwd">确认密码</label>
                             <input type="password" class="form-control" name="confirmPwd" placeholder="请输入确认密码">
                         </div>
-                        <p style="text-align: right;color: red;position: absolute" id="info">${msg}</p><br/>
+                        <p style="text-align: right;color: red;position: absolute" id="info">${msg}</p><br>
                     </div>
                     <input type="submit" class="btn btn-primary  btn-block" value="确认">
                 </form>

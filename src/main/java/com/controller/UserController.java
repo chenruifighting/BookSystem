@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.aliyuncs.CommonRequest;
-import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
@@ -44,25 +43,16 @@ public class UserController {
 	public String doLogin(User user, Model model) {
 		List<User> users=userService.selectUser();
 		for (User u : users) {
-			if(user.getId().equals(u.getId())&& Md5Class.stringToMd5(user.getPassword()).equals(u.getPassword())&&user.getRole()==1&&u.getRole()==1){
+			if(user.getId().equals(u.getId())&& Md5Class.stringToMd5(user.getPassword()).equals(u.getPassword())&&u.getRole()==1){
 				model.addAttribute("user",u);
 				return "show";
-			}else if(user.getId().equals(u.getId())&& Md5Class.stringToMd5(user.getPassword()).equals(u.getPassword())&&user.getRole()==0&&u.getRole()==0){
+			}else if(user.getId().equals(u.getId())&& Md5Class.stringToMd5(user.getPassword()).equals(u.getPassword())&&u.getRole()==0){
 				model.addAttribute("user",u);
 				return "reader_show";
 			}
 		}
 		model.addAttribute("msg","用户名或者密码错误");
 		return "forward:/user/login";
-	}
-	/**
-	 * 发送ajax请求，将role保存在session域中
-	 * @param user
-	 * @param model
-	 */
-	@RequestMapping("/roleReg")
-	public void register(User user,Model model) {
-		model.addAttribute("user",user);
 	}
 	/**
 	 * 跳转到注册页面
@@ -148,7 +138,6 @@ public class UserController {
 		status.setComplete();
 		return "login";
 	}
-
 	/**
 	 * 跳转到忘记密码界面
 	 * @return
@@ -161,16 +150,20 @@ public class UserController {
 	public String doForgetPwd(User user,String code, ModelMap modelMap) {
 		String c=modelMap.get("code").toString();
 		User u=userService.selectOne(user.getId());
-		if(u!=null&&c.equals(code)){
-			userService.update(user.getId(),Md5Class.stringToMd5(user.getPassword()));
-			return "login";
-		}else if(u==null){
-			modelMap.addAttribute("msg","用户ID不存在");
-			return "forgetPwd";
-		}else {
-			modelMap.addAttribute("msg","验证码输入错误");
-			return "forgetPwd";
+		if(u!=null){
+			if(user.getName().equals(u.getName())&&c.equals(code)){
+				userService.update(user.getId(),Md5Class.stringToMd5(user.getPassword()));
+				return "login";
+			}else if(!user.getName().equals(u.getName())){
+				modelMap.addAttribute("msg","用户名输入错误");
+				return "forgetPwd";
+			}else {
+				modelMap.addAttribute("msg","验证码输入错误");
+				return "forgetPwd";
+			}
 		}
+		modelMap.addAttribute("msg","用户ID不存在");
+		return "forgetPwd";
 	}
 	@RequestMapping("/code")
 	@ResponseBody
@@ -194,7 +187,7 @@ public class UserController {
 		request.putQueryParameter("TemplateCode","SMS_186395978");
 		request.putQueryParameter("TemplateParam","{'code':"+code+"}");
 		try {
-			CommonResponse response = client.getCommonResponse(request);
+			client.getCommonResponse(request);
 		} catch (ServerException e) {
 			e.printStackTrace();
 		} catch (ClientException e) {

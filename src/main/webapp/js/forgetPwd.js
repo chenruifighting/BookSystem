@@ -3,6 +3,10 @@ function show(f){
         $("#info").text("用户ID不能为空");
         return false;
     }
+    if(!(/^.+$/.test(f.name.value))){
+        $("#info").text("用户名不能为空");
+        return false;
+    }
     if(!(/^.+$/.test(f.telephone.value))){
         $("#info").text("手机号码不能为空");
         return false;

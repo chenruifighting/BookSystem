@@ -21,7 +21,7 @@ public interface IUserDao {
 	 * 将用户名，密码保存到数据库中
 	 * @param user
 	 */
-	@Insert("insert into user(id,name,password,role) values(#{id},#{name},#{password},#{role})")
+	@Insert("insert into user(id,name,password,role) values(#{id},#{name},#{password},0)")
 	void insert(User user);
 	/**
 	 * 根据姓名查询密码

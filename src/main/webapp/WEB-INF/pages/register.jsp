@@ -37,22 +37,17 @@
 		<div class="panel-body">
 			<div class="panel panel-default" id="register">
 			    <div class="panel-heading" style="background-color: #fff">
-			    	<c:if test="${user.role==1}">
-	                	 <h3 class="panel-title">管理员注册</h3>     
-	                </c:if>
-	                <c:if test="${user.role==0}">
-	                	 <h3 class="panel-title">借阅者注册</h3>     
-	                </c:if>
+					<h3 class="panel-title">用户注册</h3>
 			    </div>
-			    <form action="${pageContext.request.contextPath}/user/doReg?role=${user.role}" method="post" onSubmit="return show(this)">
+			    <form action="${pageContext.request.contextPath}/user/doReg" method="post" onSubmit="return show(this)">
 				    <div class="panel-body">
 				        <div class="form-group">
 				            <label for="id">用户ID</label>
 				           	<input type="text" class="form-control" id="id" name="id" placeholder="请输入用户ID"><span id="userId"></span>
 				        </div>
 				        <div class="form-group">
-				            <label for="name">姓名</label>
-				            <input type="text" class="form-control" name="name" placeholder="请输入姓名">
+				            <label for="name">用户名</label>
+				            <input type="text" class="form-control" name="name" placeholder="请输入用户名">
 				        </div>
 				        <div class="form-group">
 				            <label for="password">密码</label>
@@ -62,7 +57,7 @@
 				            <label for="confirmPwd">确认密码</label>
 				            <input type="password" class="form-control" name="confirmPwd" placeholder="请输入确认密码">
 				        </div>
-				        <p style="text-align: right;color: red;position: absolute" id="info">${msg}</p><br/>	
+				        <p style="text-align: right;color: red;position: absolute" id="info">${msg}</p><br>
 			        </div>			
 				    <input type="submit" class="btn btn-primary  btn-block" value="注册">
  				</form>

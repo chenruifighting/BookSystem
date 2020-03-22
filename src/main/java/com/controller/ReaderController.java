@@ -26,7 +26,6 @@ public class ReaderController {
 	private IBookService bookService;
 	@Autowired
 	private IDateRecordService dateRecordService;
-
 	/**
 	 * 添加读者借阅信息
 	 *
@@ -52,7 +51,6 @@ public class ReaderController {
 		model.addAttribute("pageInfo",pageInfo);
 		return "allReaders";
 	}
-
 	/**
 	 * 根据readerId查询读者信息，并跳转到更新界面
 	 *
@@ -73,7 +71,6 @@ public class ReaderController {
 		model.addAttribute("update", update);
 		return "reader_updateInfo";
 	}
-
 	/**
 	 * 根据readerId更新读者信息，并跳转到更新界面
 	 *
@@ -112,7 +109,6 @@ public class ReaderController {
 		model.addAttribute("readers", readers);
 		return "returnReader";
 	}
-
 	/**
 	 * 跳转到读者信息界面
 	 *
@@ -149,7 +145,6 @@ public class ReaderController {
 		PageInfo<Reader> pageInfo = readerService.selectReaders(1);
 		return "redirect:/reader/allReaders?page="+pageInfo.getNavigateLastPage();
 	}
-
 	/**
 	 * 根据readerId查询所借图书
 	 *
