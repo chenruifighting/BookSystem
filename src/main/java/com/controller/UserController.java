@@ -52,7 +52,7 @@ public class UserController {
 			}
 		}
 		model.addAttribute("msg","用户名或者密码错误");
-		return "forward:/user/login";
+		return "login";
 	}
 	/**
 	 * 跳转到注册页面
@@ -148,10 +148,13 @@ public class UserController {
 	}
 	@RequestMapping("/doForgetPwd")
 	public String doForgetPwd(User user,String code, ModelMap modelMap) {
-		String c=modelMap.get("code").toString();
+		if(modelMap.get("code")==null){
+			modelMap.addAttribute("msg","请先获取验证码");
+			return "forgetPwd";
+		}
 		User u=userService.selectOne(user.getId());
 		if(u!=null){
-			if(user.getName().equals(u.getName())&&c.equals(code)){
+			if(user.getName().equals(u.getName())&&code.equals(modelMap.get("code"))){
 				userService.update(user.getId(),Md5Class.stringToMd5(user.getPassword()));
 				return "login";
 			}else if(!user.getName().equals(u.getName())){
@@ -193,5 +196,13 @@ public class UserController {
 		} catch (ClientException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * 短信过期，将code删除
+	 * @param status
+	 */
+	@RequestMapping("/timeOut")
+	public void timeOut(SessionStatus status){
+		status.setComplete();
 	}
 }

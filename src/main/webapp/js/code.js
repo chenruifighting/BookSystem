@@ -18,6 +18,9 @@ function timer(){
     flag--;
     $("#getCode").html(flag+"秒后，重新获取验证码");
     if(flag==0){
+        $.ajax({
+            url:"timeOut",
+        });
         $("#getCode").html("获取验证码");
         flag=60;
     }else{

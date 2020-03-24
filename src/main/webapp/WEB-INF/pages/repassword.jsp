@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js" ></script>
-    <script src="${pageContext.request.contextPath}/js/js.cookie.js"></script>
     <script src="${pageContext.request.contextPath}/js/model.js"></script>
     <script src="${pageContext.request.contextPath}/js/repassword.js"></script>
 </head>

@@ -14,7 +14,7 @@
     <script src="${pageContext.request.contextPath}/js/login.js"></script>
 </head>
 <body>
-<h2 style="text-align: center;font-family: 'Adobe 楷体 Std R';color: palevioletred">图书馆</h2>
+<h2 style="text-align: center;font-family: 'Adobe 楷体 Std R';color: palevioletred">图 书 馆</h2>
 <div style="float:right;" id="github_iframe"></div>
 <div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
@@ -42,24 +42,29 @@
 </div>
 <div class="panel panel-default" id="login">
     <div class="panel-heading" style="background-color: #fff">
-        <h3 class="panel-title">请登录</h3>
+        <label>
+            <h3 class="panel-title">请登录</h3>
+        </label>
+        <a style="margin-left: 200px" href="${pageContext.request.contextPath}/user/reg">用户注册</a>
     </div>
-    <form action="${pageContext.request.contextPath}/user/doLogin" method="post" onSubmit="return show(this)">
+    <form action="${pageContext.request.contextPath}/user/doLogin" method="post">
 	    <div class="panel-body">
 	        <div class="form-group">
 	            <label for="id">用户ID</label>
-	           	<input type="text" class="form-control" name="id" placeholder="请输入用户ID">
+	           	<input type="text" class="form-control" name="id" id="id" placeholder="请输入用户ID">
 	        </div>
 	        <div class="form-group">
 	            <label for="password">密码</label>
-	            <input type="password" class="form-control" name="password" placeholder="请输入密码">
+	            <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码">
 	        </div>
-			<div class="form-group text-left">
-				<a style="margin-left: 10px" href="${pageContext.request.contextPath}/user/reg">用户注册</a>
-				<a style="margin-left: 180px" href="${pageContext.request.contextPath}/user/forgetPwd">忘记密码?</a>
+			<div class="checkbox text-left">
+                <label>
+                   <input type="checkbox" id="remember">记住密码
+                </label>
+                <a style="margin-left: 170px" href="${pageContext.request.contextPath}/user/forgetPwd">忘记密码?</a>
 			</div>
             <p style="text-align: right;color: red;position: absolute" id="info">${msg}</p><br>
-			<input type="submit" style="margin-left: 3px" class="btn btn-primary  btn-block" value="登录">
+            <button id="loginButton"  class="btn btn-primary  btn-block">登录</button>
 	    </div>
     </form>
 </div>
