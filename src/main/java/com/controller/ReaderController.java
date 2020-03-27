@@ -33,11 +33,11 @@ public class ReaderController {
 	 * @return
 	 */
 	@RequestMapping("/insert")
-	public String insert(Reader reader) {
+	public String insert(Reader reader, ModelMap modelMap) {
 		readerService.insert(reader);
 		bookService.updateState(reader);
 		dateRecordService.updateDate(reader.getReaderId(), reader.getBookId(), reader.getName());
-		return "redirect:/date/borrowReturn";
+		return "redirect:/date/borrowReturn?page=1";
 	}
 	/**
 	 * 查询所有读者

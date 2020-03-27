@@ -20,7 +20,8 @@
 	            <tr>
 	                <th>流水号</th>
 	                <th>借出日期</th>
-	                <th>归还日期</th>
+					<th>应当归还日期</th>
+	                <th>实际归还日期</th>
 	                <th>借还状况</th>
 	            </tr>
             </thead>
@@ -29,6 +30,7 @@
 	                <tr>
 	                    <td><c:out value="${date.bookId}"></c:out></td>
 	                    <td><c:out value="${date.borrowDate}"></c:out></td>
+						<td><c:out value="${date.dueDate}"></c:out></td>
 	                    <td><c:out value="${date.returnDate}"></c:out></td>
 	                    <c:if test="${empty date.returnDate}">
 	                        <td><a class="btn btn-danger btn-xs">未归还</a></td>
@@ -36,9 +38,9 @@
 	                    <c:if test="${!empty date.returnDate}">
 	                        <td><a class="btn btn-success btn-xs">已归还</a></td>
 	                    </c:if>
-	                    <%-- <c:if test="">
-	                        <td>超期</td>
-	                    </c:if> --%>
+<%--	                    <c:if test="">--%>
+<%--	                        <td>已超期</td>--%>
+<%--	                    </c:if>--%>
 	                </tr>
 	            </c:forEach>
             </tbody>

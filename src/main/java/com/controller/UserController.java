@@ -168,6 +168,12 @@ public class UserController {
 		modelMap.addAttribute("msg","用户ID不存在");
 		return "forgetPwd";
 	}
+
+	/**
+	 *	通过短信将验证码发送到手机
+	 * @param telephone
+	 * @param model
+	 */
 	@RequestMapping("/code")
 	@ResponseBody
 	public void code(String telephone, Model model){

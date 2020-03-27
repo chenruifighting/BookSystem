@@ -14,5 +14,6 @@ public class DateRecord {
 	private String readerName;
 	private int readerId;
 	private String borrowDate;
-	private String returnDate;
+	private String dueDate; //应该当归还时间
+	private String returnDate;//s实际归还时间
 }

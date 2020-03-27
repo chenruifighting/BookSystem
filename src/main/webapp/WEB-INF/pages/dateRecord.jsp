@@ -23,7 +23,8 @@
 	                <th>读者姓名</th>
 	                <th>读者ID</th>
 	                <th>借出日期</th>
-	                <th>归还日期</th>
+					<th>应当归还日期</th>
+	                <th>实际归还日期</th>
 	                <th>删除</th>
 	            </tr>
             </thead>
@@ -34,6 +35,7 @@
 	                    <td><c:out value="${date.readerName}"></c:out></td>
 	                    <td><c:out value="${date.readerId}"></c:out></td>
 	                    <td><c:out value="${date.borrowDate}"></c:out></td>
+						<td><c:out value="${date.dueDate}"></c:out></td>
 	                    <td><c:out value="${date.returnDate}"></c:out></td>
 	                    <c:if test="${!empty date.returnDate}">
 	                	 	<td><a href="${pageContext.request.contextPath}/date/deleteReturnReader?bookId=<c:out value="${date.bookId}"></c:out>"><button type="button" class="btn btn-success btn-xs" onclick="return confirm('确定将此记录删除？')">删除</button></a></td>     

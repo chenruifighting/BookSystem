@@ -174,6 +174,6 @@ public class BookController {
 	public String returnBook(Integer id) {
 		bookService.returnBook(id);
 		dateRecordService.returnDate(id);
-		return "redirect:/date/borrowReturn";
+		return "redirect:/date/borrowReturn?page=1";
 	}
 }

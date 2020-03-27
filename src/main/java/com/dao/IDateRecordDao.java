@@ -18,7 +18,7 @@ public interface IDateRecordDao {
 	 * @param bookId
 	 * @param readerName
 	 */
-	@Insert("insert into daterecord(bookId,readerId,readerName,borrowDate) values(#{bookId},#{readerId},#{readerName},Now())")
+	@Insert("insert into daterecord(bookId,readerId,readerName,borrowDate,dueDate) values(#{bookId},#{readerId},#{readerName},Now(),DATE_ADD(now(),INTERVAL 6 MONTH))")
 	void updateDate(@Param("readerId") Integer readerId,@Param("bookId") Integer bookId,@Param("readerName")String readerName);
 	/**
 	 * 根据bookId更新还书时间
