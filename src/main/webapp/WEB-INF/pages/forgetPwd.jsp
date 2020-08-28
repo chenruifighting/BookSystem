@@ -8,7 +8,41 @@
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js" ></script>
     <script src="${pageContext.request.contextPath}/js/model.js"></script>
     <script src="${pageContext.request.contextPath}/js/forgetPwd.js"></script>
-    <script src="${pageContext.request.contextPath}/js/code.js"></script>
+    <script type="text/javascript">
+        let flag=60;
+        $(function(){
+            $("#getCode").click(
+                function(){
+                    const telephone=$("#telephone").val();
+                    if (!(/^.+$/.test(telephone))) {
+                        $("#info").text("请先输入手机号码");
+                        return false;
+                    }
+                    if(flag<60){
+                        return;
+                    }
+                    $.ajax({
+                        url:"code",
+                        data:{"telephone":telephone},
+                    });
+                    timer();
+                }
+            );
+        });
+        function timer(){
+            flag--;
+            $("#getCode").html(flag+"秒后，重新获取验证码");
+            if(flag==0){
+                $.ajax({
+                    url:"timeOut",
+                });
+                $("#getCode").html("获取验证码");
+                flag=60;
+            }else{
+                setTimeout("timer()",1000);
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="col-xs-6 col-md-offset-3" style="position: relative;margin-top: 3%">

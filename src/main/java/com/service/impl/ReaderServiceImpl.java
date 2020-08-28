@@ -17,12 +17,10 @@ public class ReaderServiceImpl implements IReaderService{
 	private IReaderDao readerDao;
 	@Override
 	public void insert(Reader reader) {
-		// TODO Auto-generated method stub
 		readerDao.insert(reader);
 	}
 	@Override
 	public Reader returnReader(Integer bookId) {
-		// TODO Auto-generated method stub
 		return readerDao.returnReader(bookId);
 	}
 	@Override
@@ -34,32 +32,27 @@ public class ReaderServiceImpl implements IReaderService{
 	}
 	@Override
 	public Reader selectOne(Integer readerId) {
-		// TODO Auto-generated method stub
 		return readerDao.selectOne(readerId);
 	}
 	@Override
 	public void doUpdateReader(Reader reader) {
-		// TODO Auto-generated method stub
 		readerDao.doUpdateReader(reader);
 	}
 	@Override
 	public List<Reader> returnReaders() {
-		// TODO Auto-generated method stub
 		return readerDao.returnReaders();
 	}
 	@Override
 	public void addReader(Reader reader) {
 		// TODO Auto-generated method stub
-		readerDao.addReader(reader);
+		//readerDao.addReader(reader);
 	}
 	@Override
 	public List<Books> selectBooks(Integer readerId) {
-		// TODO Auto-generated method stub
 		return readerDao.selectBooks(readerId);
 	}
 	@Override
 	public Reader readerInfo(Integer readerId) {
-		// TODO Auto-generated method stub
 		return readerDao.readerInfo(readerId);
 	}
 }

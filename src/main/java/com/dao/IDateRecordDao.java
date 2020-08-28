@@ -25,7 +25,7 @@ public interface IDateRecordDao {
 	 * @param bookId
 	 */
 	@Update("update daterecord set returnDate=now() where bookId=#{bookId}")
-	void returnDate(@Param("bookId") Integer bookId);
+	void returnDate(Integer bookId);
 	/**
 	 * 查询借还日志
 	 * @return
@@ -36,7 +36,7 @@ public interface IDateRecordDao {
 	 * 根据bookIdId删除读者
 	 * @param bookId
 	 */
-	@Delete("delete from daterecord where bookId=#{bookId}")
+	@Delete("delete from daterecord where bookId=#{bookId} and returnDate is not null")
 	void delete(Integer bookId);
 	/**
 	 * 根据readerId查询借还信息

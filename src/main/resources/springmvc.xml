@@ -28,7 +28,7 @@
 	<mvc:resources location="/images/" mapping="/images/**"/>
 	<mvc:resources location="/js/" mapping="/js/**"/>
 	<mvc:default-servlet-handler/>
-	<!-- 开启对SpringMVC注解的支持 -->
+	<!-- 自动加载处理器映射器和处理器适配器 -->
 	<mvc:annotation-driven />
 	
 </beans>

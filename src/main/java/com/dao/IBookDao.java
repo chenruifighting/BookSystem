@@ -69,5 +69,5 @@ public interface IBookDao {
 	 * @param bookId
 	 */
 	@Update("update books set state=1 where id=#{bookId}")
-	void returnBook(@Param("bookId") Integer bookId);
+	void returnBook(Integer bookId);
 }

@@ -5,26 +5,30 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
+  <properties>
+    <spring.version>5.1.9.RELEASE</spring.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>5.1.9.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>5.1.9.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>5.1.9.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>5.1.9.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>mysql</groupId>
@@ -82,12 +86,24 @@
     <dependency>
       <groupId>com.aliyun</groupId>
       <artifactId>aliyun-java-sdk-core</artifactId>
-      <version>4.0.3</version>
+      <version>4.5.2</version>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.springframework.data</groupId>-->
-<!--      <artifactId>spring-data-redis</artifactId>-->
-<!--      <version>1.6.0.RELEASE</version>-->
-<!--    </dependency>-->
+
+   <!-- <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.9.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>${spring.version}</version>
+    </dependency>-->
+
   </dependencies>
 </project>

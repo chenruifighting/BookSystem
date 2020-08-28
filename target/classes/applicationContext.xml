@@ -25,6 +25,8 @@
 	<!-- 配置SqlSession的工厂 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<!--<property name="typeAliasesPackage" value=""></property>          配置实体类别名-->
+		<property name="mapperLocations" value="classpath:mapper/*.xml"></property> <!-- 配置mapper映射sql语句-->
 		<!-- 配置pageHelper的拦截器 -->
 		<property name="plugins">
 			<array>
@@ -37,11 +39,28 @@
 					</property>
 				</bean>
 			</array>
-	</property>
+		</property>
 	</bean>
 	<!-- 配置扫描dao的包 -->
 	<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.dao"/>
 	</bean>
+
+	<!--配置Spring框架声明式事务管理-->
+	<!--配置事务管理器-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!--配置事务通知-->
+	<!--<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="find*" read-only="true"/>
+			<tx:method name="*" isolation="DEFAULT"/>
+		</tx:attributes>
+	</tx:advice>
+	&lt;!&ndash;配置AOP增强&ndash;&gt;
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.service.impl.*ServiceImpl.*(..))"/>
+	</aop:config>-->
 
 </beans>

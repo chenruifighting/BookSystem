@@ -3,7 +3,6 @@ package com.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
@@ -37,7 +36,7 @@ public interface IReaderDao {
 	 * @return
 	 */
 	@Select("select * from reader where readerId=#{readerId}")
-	Reader selectOne(@Param("readerId")Integer readerId);
+	Reader selectOne(Integer readerId);
 	/**
 	 * 根据readerId更新读者信息
 	 * @param reader
@@ -52,8 +51,7 @@ public interface IReaderDao {
 	List<Reader> returnReaders();
 	/**
 	 * 增加读者
-	 * @param reader
-	 */
+	 * @param
 	@Insert("insert into reader(readerId,name,age,sex,telephone,address) values(#{readerId},#{name},#{age},#{sex},#{telephone},#{address})")
 	void addReader(Reader reader);
 	/**
@@ -66,5 +64,5 @@ public interface IReaderDao {
 
 
 	@Select("select readerId,name,age,sex,telephone,address from reader where readerId=#{readerId}")
-	Reader readerInfo(@Param("readerId")Integer readerId);
+	Reader readerInfo(Integer readerId);
 }
